@@ -19,7 +19,7 @@ function App() {
             onEditAvatar={ handleEditAvatarClick }
             onAddPlace={ handleAddPlaceClick }
         />
-          <PopupWithForm name="info" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} children={
+          <PopupWithForm name="info" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} children={
               <>
                   <label className="popup__form-field">
                       <input className="popup__input popup__input_name" id="name-input" type="text" name="name"
@@ -34,7 +34,7 @@ function App() {
                   <button className="popup__button popup__button_type_info" type="submit">Сохранить</button>
               </>
           } />
-          <PopupWithForm name="place" title="Новое место" isOpen={isAddPlacePopupOpen} children={
+          <PopupWithForm name="place" title="Новое место" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} children={
               <>
                   <label className="popup__form-field">
                       <input className="popup__input popup__input_place-name" id="place-name-input" type="text" name="name"
@@ -49,10 +49,10 @@ function App() {
                   <button className="popup__button popup__button_type_place" type="submit">Создать</button>
               </>
           } />
-          <PopupWithForm name="delete-card" title="Вы уверены?" isOpen={false} children={
+          <PopupWithForm name="delete-card" title="Вы уверены?" isOpen={false} onClose={closeAllPopups} children={
               <button className="popup__button popup__button_type_delete" type="button">Да</button>
           } />
-          <PopupWithForm name="avatar" title="Обновить аватар" isOpen={isEditAvatarPopupOpen} children={
+          <PopupWithForm name="avatar" title="Обновить аватар" isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} children={
               <>
                   <label className="popup__form-field">
                       <input className="popup__input popup__input_avatar" id="avatar-link-input" type="url" name="avatar"
@@ -77,6 +77,12 @@ function App() {
 
     function handleAddPlaceClick() {
         setIsAddPlacePopupOpen(true)
+    }
+
+    function closeAllPopups() {
+        setIsEditProfilePopupOpen(false)
+        setIsEditAvatarPopupOpen(false)
+        setIsAddPlacePopupOpen(false)
     }
 }
 
