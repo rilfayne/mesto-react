@@ -3,7 +3,7 @@ import React from 'react'
 function Card (props) {
     return (
         <li className="place">
-            <img className="place__image" src={props.card.link} alt={props.card.name} />
+            <img className="place__image" src={props.card.link} alt={props.card.name} onClick={handleClick} />
             <div className="place__description">
                 <h2 className="place__name">{props.card.name}</h2>
                 <div className="place__likes-container">
@@ -13,6 +13,10 @@ function Card (props) {
             </div>
         </li>
     )
+
+    function handleClick() {
+        props.onCardClick(props.card)
+    }
 }
 
 export default Card

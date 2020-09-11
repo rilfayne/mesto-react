@@ -53,18 +53,7 @@ function Main (props) {
             <section className="places indent">
                 <ul className="places__list">
                     {cards.map((card) => (
-                            < Card key={card._id} card={card}/>
-                            // <li className="place" key={card._id}>
-                            //     <img className="place__image" src={card.link} alt={card.name}/>
-                            //     <div className="place__description">
-                            //         <h2 className="place__name">{card.name}</h2>
-                            //         <div className="place__likes-container">
-                            //             <button className="place__button-like transition" type="button"
-                            //                     aria-label="Нравится"/>
-                            //             <p className="place__likes">{card.likes.length>0 ? card.likes.length : ''}</p>
-                            //         </div>
-                            //     </div>
-                            // </li>
+                            <Card key={card._id} card={card} onCardClick={ props.onCardClick }/>
                         )
                     )}
                 </ul>

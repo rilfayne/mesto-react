@@ -10,6 +10,8 @@ function App() {
     const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false)
     const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false)
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
+    const [selectedCard, setSelectedCard] = React.useState(null)
+
 
   return (
       <div className="page">
@@ -18,6 +20,7 @@ function App() {
             onEditProfile={ handleEditProfileClick }
             onEditAvatar={ handleEditAvatarClick }
             onAddPlace={ handleAddPlaceClick }
+            onCardClick={ handleCardClick }
         />
           <PopupWithForm name="info" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
               <>
@@ -62,7 +65,7 @@ function App() {
                   <button className="popup__button popup__button_type_avatar" type="submit">Сохранить</button>
               </>
           </PopupWithForm>
-          <ImagePopup />
+          <ImagePopup card={selectedCard} onClose={closeAllPopups} />
         <Footer />
       </div>
   )
@@ -83,7 +86,13 @@ function App() {
         setIsEditProfilePopupOpen(false)
         setIsEditAvatarPopupOpen(false)
         setIsAddPlacePopupOpen(false)
+        setSelectedCard(null)
     }
+
+    function handleCardClick(card) {
+        setSelectedCard(card)
+    }
+
 }
 
 export default App
