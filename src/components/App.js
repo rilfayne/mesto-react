@@ -12,6 +12,29 @@ function App() {
     const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false)
     const [selectedCard, setSelectedCard] = React.useState(null)
 
+    function handleEditProfileClick() {
+        setIsEditProfilePopupOpen(true)
+    }
+
+    function handleEditAvatarClick() {
+        setIsEditAvatarPopupOpen(true)
+    }
+
+    function handleAddPlaceClick() {
+        setIsAddPlacePopupOpen(true)
+    }
+
+    function closeAllPopups() {
+        setIsEditProfilePopupOpen(false)
+        setIsEditAvatarPopupOpen(false)
+        setIsAddPlacePopupOpen(false)
+        setSelectedCard(null)
+    }
+
+    function handleCardClick(card) {
+        setSelectedCard(card)
+    }
+
 
   return (
       <div className="page">
@@ -69,29 +92,6 @@ function App() {
         <Footer />
       </div>
   )
-
-    function handleEditProfileClick() {
-        setIsEditProfilePopupOpen(true)
-    }
-
-    function handleEditAvatarClick() {
-        setIsEditAvatarPopupOpen(true)
-    }
-
-    function handleAddPlaceClick() {
-        setIsAddPlacePopupOpen(true)
-    }
-
-    function closeAllPopups() {
-        setIsEditProfilePopupOpen(false)
-        setIsEditAvatarPopupOpen(false)
-        setIsAddPlacePopupOpen(false)
-        setSelectedCard(null)
-    }
-
-    function handleCardClick(card) {
-        setSelectedCard(card)
-    }
 
 }
 
