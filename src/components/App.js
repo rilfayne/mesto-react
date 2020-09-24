@@ -6,6 +6,7 @@ import PopupWithForm from './PopupWithForm.js'
 import ImagePopup from './ImagePopup.js'
 import api from '../utils/api.js'
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
+import EditProfilePopup from './EditProfilePopup.js'
 
 function App() {
 
@@ -49,10 +50,21 @@ function App() {
         setSelectedCard(card)
     }
 
+    function handleUpdateUser({ name, about }) {
+        api.patchUserInfo(name, about)
+            .then((res) => {
+                setCurrentUser(res)
+                closeAllPopups()
+            })
+            .catch((err) => {
+                console.log(err) // выведем ошибку в консоль
+            })
+    }
+
 
   return (
       <div className="page">
-          <CurrentUserContext.Provider value={currentUser}>
+          <CurrentUserContext.Provider value={ currentUser }>
             <Header />
             <Main
                 onEditProfile={ handleEditProfileClick }
@@ -60,21 +72,7 @@ function App() {
                 onAddPlace={ handleAddPlaceClick }
                 onCardClick={ handleCardClick }
             />
-              <PopupWithForm name="info" title="Редактировать профиль" isOpen={isEditProfilePopupOpen} onClose={closeAllPopups}>
-                  <>
-                      <label className="popup__form-field">
-                          <input className="popup__input popup__input_name" id="name-input" type="text" name="name"
-                                 placeholder="Имя" minLength="2" maxLength="40" required />
-                          <span className="popup__input-error" id="name-input-error" />
-                      </label>
-                      <label className="popup__form-field">
-                          <input className="popup__input popup__input_description" id="description-input" type="text"
-                                 name="about" placeholder="О себе" minLength="2" maxLength="200" required />
-                          <span className="popup__input-error" id="description-input-error" />
-                      </label>
-                      <button className="popup__button popup__button_type_info" type="submit">Сохранить</button>
-                  </>
-              </PopupWithForm>
+              <EditProfilePopup isOpen={ isEditProfilePopupOpen } onClose={ closeAllPopups } onUpdateUser={ handleUpdateUser } />
               <PopupWithForm name="place" title="Новое место" isOpen={isAddPlacePopupOpen} onClose={closeAllPopups}>
                   <>
                       <label className="popup__form-field">
