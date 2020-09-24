@@ -1,11 +1,19 @@
 import React from 'react'
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
 
-function Card ({ card, onCardClick }) {
+function Card ({ card, onCardClick, onCardLike, onCardDelete }) {
     const currentUser = React.useContext(CurrentUserContext)
 
     function handleClick() {
         onCardClick(card)
+    }
+
+    function handleLikeClick() {
+        onCardLike(card)
+    }
+
+    function handleDeleteClick() {
+        onCardDelete(card)
     }
 
     // Определяем, являемся ли мы владельцем текущей карточки
@@ -26,13 +34,13 @@ function Card ({ card, onCardClick }) {
 
     return (
         <li className="place">
-            <img className="place__image" src={card.link} alt={card.name} onClick={handleClick} />
-            <button className={ cardDeleteButtonClassName } type="button" aria-label="Удалить" />
+            <img className="place__image" src={ card.link } alt={ card.name } onClick={ handleClick } />
+            <button className={ cardDeleteButtonClassName } type="button" aria-label="Удалить" onClick={ handleDeleteClick } />
             <div className="place__description">
-                <h2 className="place__name">{card.name}</h2>
+                <h2 className="place__name">{ card.name }</h2>
                 <div className="place__likes-container">
-                    <button className={ cardLikeButtonClassName } type="button" aria-label="Нравится" />
-                    <p className="place__likes">{card.likes.length > 0 ? card.likes.length : ''}</p>
+                    <button className={ cardLikeButtonClassName } type="button" aria-label="Нравится" onClick={ handleLikeClick } />
+                    <p className="place__likes">{ card.likes.length > 0 ? card.likes.length : '' }</p>
                 </div>
             </div>
         </li>
