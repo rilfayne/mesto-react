@@ -8,7 +8,7 @@ import api from '../utils/api.js'
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js'
 import EditProfilePopup from './EditProfilePopup.js'
 import EditAvatarPopup from './EditAvatarPopup.js'
-import AddPlacePopup from "./AddPlacePopup";
+import AddPlacePopup from './AddPlacePopup.js'
 
 function App() {
 
@@ -83,11 +83,15 @@ function App() {
         setIsAddPlacePopupOpen(true)
     }
 
-    function closeAllPopups() {
-        setIsEditProfilePopupOpen(false)
-        setIsEditAvatarPopupOpen(false)
-        setIsAddPlacePopupOpen(false)
-        setSelectedCard(null)
+    function closeAllPopups(e) {
+        if(e.target.classList.contains('popup_opened') ||
+        e.target.classList.contains('popup__close')) {
+            setIsEditProfilePopupOpen(false)
+            setIsEditAvatarPopupOpen(false)
+            setIsAddPlacePopupOpen(false)
+            setSelectedCard(null)
+        }
+            else { return false }
     }
 
     function handleCardClick(card) {
