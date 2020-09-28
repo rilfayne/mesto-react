@@ -3,7 +3,6 @@ import React from 'react'
 
 function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
 
-    const linkRef = React.useRef({})
     const [link, setLink] = React.useState("")
 
     const [dirty, setDirty] = React.useState(false)
@@ -18,7 +17,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
 
     // Обнуление инпутов формы
     React.useEffect(() => {
-        linkRef.current.value = ""
+        setLink("")
         setDirty(false)
     }, [isOpen])
 
@@ -65,7 +64,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
         e.preventDefault()
 
         onUpdateAvatar({
-            avatar: linkRef.current.value,
+            avatar: link,
         })
     }
 
@@ -75,7 +74,7 @@ function EditAvatarPopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
         <PopupWithForm name="avatar" title="Обновить аватар" isOpen={ isOpen } onClose={ onClose } onSubmit={ handleSubmit }>
             <>
                 <label className="popup__form-field">
-                    <input onChange={ handleInputChange } value={ link } className="popup__input" type="url" name="avatar" placeholder="Ссылка на аватар" ref={ linkRef } />
+                    <input onChange={ handleInputChange } value={ link } className="popup__input" type="url" name="avatar" placeholder="Ссылка на аватар" />
                     {dirty && errors.link.required && <span className="popup__input-error">Заполните это поле</span>}
                     {errors.link.isLink && <span className="popup__input-error">Введите URL-адрес</span>}
                 </label>

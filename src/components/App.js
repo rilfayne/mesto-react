@@ -69,11 +69,13 @@ function App() {
                 )
                 setCards(newCards)
                 closeAllPopups()
-                setLoading(false)
             })
             .catch((err) => {
                 console.log(err) // выведем ошибку в консоль
             })
+            .finally(() =>{
+                setLoading(false)
+                })
     }
 
     function handleEditProfileClick() {
@@ -106,10 +108,12 @@ function App() {
             .then((res) => {
                 setCurrentUser(res)
                 closeAllPopups()
-                setLoading(false)
             })
             .catch((err) => {
                 console.log(err) // выведем ошибку в консоль
+            })
+            .finally(() =>{
+                setLoading(false)
             })
     }
 
@@ -119,10 +123,12 @@ function App() {
             .then((res) => {
                 setCurrentUser(res)
                 closeAllPopups()
-                setLoading(false)
             })
             .catch((err) => {
                 console.log(err) // выведем ошибку в консоль
+            })
+            .finally(() =>{
+                setLoading(false)
             })
     }
 
@@ -132,10 +138,12 @@ function App() {
             .then((newCard) => {
                 setCards([newCard, ...cards])
                 closeAllPopups()
-                setLoading(false)
             })
             .catch((err) => {
                 console.log(err) // выведем ошибку в консоль
+            })
+            .finally(() =>{
+                setLoading(false)
             })
     }
 
